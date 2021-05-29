@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 
-const projectID = '1b7801d6-8a66-4be4-a442-89219d833dfc';
-
-const Modal = () => {
+const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -11,7 +9,7 @@ const Modal = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const authObject = { 'Project-ID': projectID, 'User-Name': username, 'User-Secret': password };
+    const authObject = { 'Project-ID': "77fc5f33-c9f5-439d-adbb-130480df035e", 'User-Name': username, 'User-Secret': password };
 
     try {
       await axios.get('https://api.chatengine.io/chats', { headers: authObject });
@@ -20,11 +18,10 @@ const Modal = () => {
       localStorage.setItem('password', password);
 
       window.location.reload();
-      setError('');
-    } catch (err) {
+    } catch (error) {
       setError('Oops, incorrect credentials.');
     }
-  };
+  }
 
   return (
     <div className="wrapper">
@@ -39,11 +36,11 @@ const Modal = () => {
             </button>
           </div>
         </form>
-        <h1>{error}</h1>
+        <h2 className="error">{error}</h2>
       </div>
     </div>
 
   );
 };
 
-export default Modal;
+export default LoginForm;
